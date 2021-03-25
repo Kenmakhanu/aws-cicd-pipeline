@@ -20,24 +20,7 @@ resource "aws_codebuild_project" "tf-plan" {
  source {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/plan-buildspec.yml")
-    source_version = "main"
  }
- 
- 
-     
- /*source {
-    type            = "GITHUB"
-    location        = "https://github.com/Kenmakhanu/aws-cicd-pipeline.git"
-    git_clone_depth = 1
-
-    git_submodules_config {
-      fetch_submodules = true
-    }
-  }
-
-  source_version = "master"
-
-}*/
 
 resource "aws_codebuild_project" "tf-apply" {
   name          = "tf-cicd-apply"
@@ -59,18 +42,8 @@ resource "aws_codebuild_project" "tf-apply" {
 source  {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/apply-buildspec.yml")
-    source_version = "main"
   }
 }
- /*source {
-    type            = "GITHUB"
-    location        = "https://github.com/Kenmakhanu/aws-cicd-pipeline.git"
-    git_clone_depth = 1
-
-    git_submodules_config {
-      fetch_submodules = true
-    } 
-}*/
 
 # Build the pipeline
 resource "aws_codepipeline" "cicd-pipeline"{
@@ -134,5 +107,4 @@ resource "aws_codepipeline" "cicd-pipeline"{
       }
     }
   }
-}
 }
