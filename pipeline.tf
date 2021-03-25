@@ -20,7 +20,7 @@ resource "aws_codebuild_project" "tf-plan" {
  source {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/plan-buildspec.yml")
-    source_version = "master"
+    source_version = "main"
  }
  
  
@@ -59,7 +59,7 @@ resource "aws_codebuild_project" "tf-apply" {
 source  {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/apply-buildspec.yml")
-    source_version = "master"
+    source_version = "main"
   }
 }
  /*source {
@@ -95,7 +95,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
       configuration = {
         ConnectionArn    = var.codestar_connector_credentials
         FullRepositoryId = "Kenmakhanu/aws-cicd-pipeline"
-        BranchName       = "master"
+        BranchName       = "main"
         OutputArtifactFormat = "CODE_ZIP"
       }
     }
