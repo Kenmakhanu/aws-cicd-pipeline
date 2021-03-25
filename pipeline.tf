@@ -52,7 +52,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
   role_arn = aws_iam_role.tf-codepipeline-role.arn
 
   artifact_store {
-    location = aws_s3_bucket.codepipeline-artifact.id
+    location = aws_s3_bucket.codepipeline-artifact.bucket
     type     = "S3"
   }
     
@@ -84,6 +84,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
       owner            = "AWS"
       provider         = "CodeBuild"
       input_artifacts  = ["tf-code"]
+      output_artifacts = ["tf-code1]
       version          = "1"
       configuration = {
         ProjectName = "tf-cicd-plan"
@@ -99,11 +100,11 @@ resource "aws_codepipeline" "cicd-pipeline"{
       category        = "Deploy"
       provider        = "CodeDeploy"
       owner            = "AWS"
-      input_artifacts = ["tf-code"]
+      input_artifacts = ["tf-code1"]
       version         = "1"
       configuration = {
-        ApplicationName    = "tf-cicd-plan"
-        DeploymentGroupName = "tf-cicd-plan"
+        ApplicationName    = "tf-cicd-apply"
+        DeploymentGroupName = "tf-cicd-apply"
         
       }
     }
