@@ -129,3 +129,4 @@ resource "aws_codepipeline" "cicd-pipeline"{
     }
   }
 }
+}
