@@ -11,17 +11,22 @@ resource "aws_codebuild_project" "tf-plan" {
     image                       = "hashicorp/terraform:0.14.4"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "SERVICE_ROLE"
+    privileged_mode             = true
     registry_credential {
         credential = var.dockerhub_credentials
         credential_provider = "SECRETS_MANAGER"
     }
   }
 
- /*source {
+ source {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/plan-buildspec.yml")
- }*/
- source {
+    source_version = "main"
+ }
+ 
+ 
+     
+ /*source {
     type            = "GITHUB"
     location        = "https://github.com/Kenmakhanu/aws-cicd-pipeline.git"
     git_clone_depth = 1
@@ -33,12 +38,13 @@ resource "aws_codebuild_project" "tf-plan" {
 
   source_version = "master"
 
-}
+}*/
 
 resource "aws_codebuild_project" "tf-apply" {
   name          = "tf-cicd-apply"
   description   = "Apply stage for terraform"
   service_role  = aws_iam_role.tf-codebuild-role.arn
+
   artifacts {
     type = "CODEPIPELINE"
   }
@@ -47,16 +53,19 @@ resource "aws_codebuild_project" "tf-apply" {
     image                       = "hashicorp/terraform:0.14.4"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "SERVICE_ROLE"
+    privileged_mode             = true
     registry_credential {
         credential = var.dockerhub_credentials
         credential_provider = "SECRETS_MANAGER"
     }
   }
-/*source  {
+source  {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/apply-buildspec.yml")
-  }*/
- source {
+    source_version = "main"
+  }
+}
+ /*source {
     type            = "GITHUB"
     location        = "https://github.com/Kenmakhanu/aws-cicd-pipeline.git"
     git_clone_depth = 1
@@ -64,7 +73,7 @@ resource "aws_codebuild_project" "tf-apply" {
     git_submodules_config {
       fetch_submodules = true
     } 
-}
+}*/
 
 # Build the pipeline
 resource "aws_codepipeline" "cicd-pipeline"{
@@ -89,7 +98,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
       configuration = {
         ConnectionArn    = var.codestar_connector_credentials
         FullRepositoryId = "Kenmakhanu/aws-cicd-pipeline"
-        BranchName       = "master"
+        BranchName       = "main"
         OutputArtifactFormat = "CODE_ZIP"
       }
     }
@@ -128,4 +137,5 @@ resource "aws_codepipeline" "cicd-pipeline"{
       }
     }
   }
+}
 }
