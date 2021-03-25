@@ -4,7 +4,7 @@ resource "aws_codebuild_project" "tf-plan" {
   service_role  = aws_iam_role.tf-codebuild-role.arn
 
   artifacts {
-    type = "s3"
+    type = "CODEPIPELINE"
   }
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
@@ -28,7 +28,7 @@ resource "aws_codebuild_project" "tf-apply" {
   description   = "Apply stage for terraform"
   service_role  = aws_iam_role.tf-codebuild-role.arn
   artifacts {
-    type = "s3"
+    type = "CODEPIPELINE"
   }
   environment {
     compute_type                = "BUILD_GENERAL1_SMALL"
