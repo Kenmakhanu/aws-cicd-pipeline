@@ -21,10 +21,9 @@ resource "aws_codebuild_project" "tf-plan" {
  source {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/plan-buildspec.yml")
-    source_version = "main"
  }
  
- 
+}
      
  /*source {
     type            = "GITHUB"
@@ -62,7 +61,6 @@ resource "aws_codebuild_project" "tf-apply" {
 source  {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/apply-buildspec.yml")
-    source_version = "main"
   }
 }
  /*source {
@@ -137,5 +135,4 @@ resource "aws_codepipeline" "cicd-pipeline"{
       }
     }
   }
-}
 }
