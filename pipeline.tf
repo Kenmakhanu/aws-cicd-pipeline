@@ -17,11 +17,15 @@ resource "aws_codebuild_project" "tf-plan" {
     }
   }
 
- /*source {
+ source {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/plan-buildspec.yml")
- }*/
- source {
+    source_version = "master"
+ }
+ 
+ 
+     
+ /*source {
     type            = "GITHUB"
     location        = "https://github.com/Kenmakhanu/aws-cicd-pipeline.git"
     git_clone_depth = 1
@@ -33,7 +37,7 @@ resource "aws_codebuild_project" "tf-plan" {
 
   source_version = "master"
 
-}
+}*/
 
 resource "aws_codebuild_project" "tf-apply" {
   name          = "tf-cicd-apply"
@@ -52,11 +56,13 @@ resource "aws_codebuild_project" "tf-apply" {
         credential_provider = "SECRETS_MANAGER"
     }
   }
-/*source  {
+source  {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/apply-buildspec.yml")
-  }*/
- source {
+    source_version = "master"
+  }
+}
+ /*source {
     type            = "GITHUB"
     location        = "https://github.com/Kenmakhanu/aws-cicd-pipeline.git"
     git_clone_depth = 1
@@ -64,7 +70,7 @@ resource "aws_codebuild_project" "tf-apply" {
     git_submodules_config {
       fetch_submodules = true
     } 
-}
+}*/
 
 # Build the pipeline
 resource "aws_codepipeline" "cicd-pipeline"{
