@@ -1,3 +1,4 @@
 #ignore the files
 .terraform.lock.hcl
 /.terraform
+terraform.tfvars
