@@ -73,7 +73,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
       configuration = {
         ConnectionArn    = var.codestar_connector_credentials
         FullRepositoryId = "Kenmakhanu/aws-cicd-pipeline"
-        BranchName       = "master"
+        BranchName       = "main"
         OutputArtifactFormat = "CODE_ZIP"
       }
     }
