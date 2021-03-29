@@ -104,7 +104,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
       input_artifacts = ["tf-code"]
       version         = "1"
       configuration = {
-        ApplicationName    = "tf-cicd-appy"
+        ProjectName    = "tf-cicd-appy"
         
       }
     }
