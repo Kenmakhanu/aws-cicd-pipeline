@@ -27,7 +27,7 @@ data "aws_iam_policy_document" "tf-cicd-pipeline-policies" {
   }
   statement {
     sid = ""
-    actions = ["cloudwatch:*", "s3:*", "codebuild:*", "codedeploy:*"]
+    actions = ["cloudwatch:*", "s3:*", "codebuild:*"]
     resources = ["*"]
     effect = "Allow"
   } 
@@ -70,7 +70,7 @@ resource "aws_iam_role" "tf-codebuild-role" {
 data "aws_iam_policy_document" "tf-cicd-build-policies" {
   statement {
     sid = ""
-    actions = ["logs:*", "s3:*", "codebuild:*", "codedeploy:*", "secretsmanager:*", "iam:*"]
+    actions = ["logs:*", "s3:*", "codebuild:*", "secretsmanager:*", "iam:*"]
     resources = ["*"]
     effect = "Allow"
   }
