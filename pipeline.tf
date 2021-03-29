@@ -11,7 +11,6 @@ resource "aws_codebuild_project" "tf-plan" {
     image                       = "hashicorp/terraform:0.14.4"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "SERVICE_ROLE"
-    privileged_mode             = true
     registry_credential {
         credential = var.dockerhub_credentials
         credential_provider = "SECRETS_MANAGER"
@@ -38,7 +37,6 @@ resource "aws_codebuild_project" "tf-apply" {
     image                       = "hashicorp/terraform:0.14.4"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "SERVICE_ROLE"
-    privileged_mode             = true
     registry_credential {
         credential = var.dockerhub_credentials
         credential_provider = "SECRETS_MANAGER"
@@ -56,7 +54,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
   role_arn = aws_iam_role.tf-codepipeline-role.arn
 
   artifact_store {
-    location = aws_s3_bucket.codepipeline-artifact.bucket
+    location = aws_s3_bucket.codepipeline-artifact.id
     type     = "S3"
   }
     
@@ -108,7 +106,6 @@ resource "aws_codepipeline" "cicd-pipeline"{
       version         = "1"
       configuration = {
         ApplicationName    = "tf-cicd-appy"
-        DeploymentGroupName = "tf-cicd-apply"
         
       }
     }
