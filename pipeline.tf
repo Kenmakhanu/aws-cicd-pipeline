@@ -101,8 +101,8 @@ resource "aws_codepipeline" "cicd-pipeline"{
 
     action {
       name            = "Deploy"
-      category        = "Deploy"
-      provider        = "CodeDeploy"
+      category        = "Build"
+      provider        = "CodeBuild"
       owner            = "AWS"
       input_artifacts = ["tf-code1"]
       version         = "1"
