@@ -95,7 +95,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
     }
   }
 
-  stage {
+ /* stage {
     name = "Apply"
 
     action {
@@ -110,5 +110,5 @@ resource "aws_codepipeline" "cicd-pipeline"{
         
       }
     }
-  }
+  }*/
 }
