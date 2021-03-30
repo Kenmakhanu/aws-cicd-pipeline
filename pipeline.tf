@@ -102,7 +102,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
       name            = "Build"
       category        = "Build"
       provider        = "CodeBuild"
-      owner            = "AWS"
+      owner            = "Kendrewhomesolutions"
       input_artifacts = ["tf-code"]
       version         = "1"
       configuration = {
