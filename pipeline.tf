@@ -11,7 +11,6 @@ resource "aws_codebuild_project" "tf-plan" {
     image                       = "hashicorp/terraform:0.14.4"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "SERVICE_ROLE"
-    privileged_mode             = true
     registry_credential {
         credential = var.dockerhub_credentials
         credential_provider = "SECRETS_MANAGER"
@@ -25,7 +24,7 @@ resource "aws_codebuild_project" "tf-plan" {
  
 }
 
-/*resource "aws_codebuild_project" "tf-apply" {
+resource "aws_codebuild_project" "tf-apply" {
   name          = "tf-cicd-apply"
   description   = "Apply stage for terraform"
   service_role  = aws_iam_role.tf-codebuild-role.arn
@@ -38,7 +37,6 @@ resource "aws_codebuild_project" "tf-plan" {
     image                       = "hashicorp/terraform:0.14.4"
     type                        = "LINUX_CONTAINER"
     image_pull_credentials_type = "SERVICE_ROLE"
-    privileged_mode             = true
     registry_credential {
         credential = var.dockerhub_credentials
         credential_provider = "SECRETS_MANAGER"
@@ -48,7 +46,7 @@ source  {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/apply-buildspec.yml")
   }
-}*/
+}
 
 # Build the pipeline
 resource "aws_codepipeline" "cicd-pipeline"{
@@ -56,7 +54,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
   role_arn = aws_iam_role.tf-codepipeline-role.arn
 
   artifact_store {
-    location = aws_s3_bucket.codepipeline-artifact.bucket
+    location = aws_s3_bucket.codepipeline-artifact.id
     type     = "S3"
   }
     
@@ -95,20 +93,20 @@ resource "aws_codepipeline" "cicd-pipeline"{
     }
   }
 
- /* stage {
+  stage {
     name = "Apply"
 
     action {
-      name            = "Build"
+      name            = "Apply"
       category        = "Build"
       provider        = "CodeBuild"
       owner            = "AWS"
       input_artifacts = ["tf-code"]
       version         = "1"
       configuration = {
-        ProjectName    = "tf-cicd-apply"
+        ProjectName    = "tf-cicd-appy"
         
       }
     }
-  }*/
+  }
 }
