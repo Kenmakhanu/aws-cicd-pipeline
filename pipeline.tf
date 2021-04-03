@@ -42,7 +42,7 @@ resource "aws_codebuild_project" "tf-apply" {
         credential_provider = "SECRETS_MANAGER"
     }
   }
-source  {
+  source  {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/apply-buildspec.yml")
   }
