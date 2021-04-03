@@ -94,7 +94,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
   }
 
   stage {
-    name = "Deploy"
+    name = "Apply"
 
     action {
       name            = "Deploy"
