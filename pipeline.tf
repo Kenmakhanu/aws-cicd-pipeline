@@ -122,9 +122,9 @@ resource "aws_codepipeline" "cicd-pipeline"{
         BucketName  = aws_s3_bucket.codepipeline-artifact.id
         Extract     = "true"
       }
-     # input_artifacts = [
-      #  "PlanArtifact",
-     # ]
+     input_artifacts = [
+        "PlanArtifact",
+     ]
       name             = "Deploy"
       output_artifacts = []
       owner            = "AWS"
