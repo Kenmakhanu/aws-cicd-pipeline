@@ -105,7 +105,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
     action {
       name            = "Build"
       category        = "Build"
-      provider        = "s3"
+      provider        = "CodeBuild"
       owner            = "AWS"
       input_artifacts = ["PlanArtifact",]
       version         = "1"
