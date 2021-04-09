@@ -22,7 +22,7 @@ resource "aws_codebuild_project" "tf-plan" {
     buildspec = file("buildspec/plan-buildspec.yml")
  }
  
-}
+ }
 
 resource "aws_codebuild_project" "tf-apply" {
   name          = "tf-cicd-apply"
@@ -113,25 +113,4 @@ resource "aws_codepipeline" "cicd-pipeline"{
       }
     }
   }
-  stage {
-    name = "Deploy"
-
-    action {
-      category = "Source"
-      configuration = {
-        BucketName  = aws_s3_bucket.codepipeline-artifact.id
-        Extract     = "true"
-      }
-     input_artifacts = [
-        "PlanArtifact",
-     ]
-      name             = "Deploy"
-      output_artifacts = []
-      owner            = "AWS"
-      provider         = "S3"
-      run_order        = 1
-      version          = "1"
-    }
-  }
 }
-
