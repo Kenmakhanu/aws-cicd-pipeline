@@ -62,14 +62,12 @@ resource "aws_codepipeline" "cicd-pipeline"{
     name = "Source"
 
     action {
-     # name             = "Source"
+      name             = "Source"
       category         = "Source"
       owner            = "AWS"
       provider         = "CodeStarSourceConnection"
-      #output_artifacts = ["tf-code"]
       version          =  "1"
       input_artifacts = []
-       name            = "Source"
       output_artifacts = [
         "SourceArtifact",
       ]
@@ -124,9 +122,9 @@ resource "aws_codepipeline" "cicd-pipeline"{
         BucketName  = aws_s3_bucket.codepipeline-artifact.id
         Extract     = "true"
       }
-      input_artifacts = [
-        "PlanArtifact",
-      ]
+     # input_artifacts = [
+      #  "PlanArtifact",
+     # ]
       name             = "Deploy"
       output_artifacts = []
       owner            = "AWS"
