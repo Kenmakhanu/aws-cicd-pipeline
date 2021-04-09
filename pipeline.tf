@@ -44,7 +44,7 @@ resource "aws_codebuild_project" "tf-apply" {
   }
   source  {
     type   = "CODEPIPELINE"
-    buildspec = file("buildspec/plan-buildspec.yml")
+    buildspec = file("buildspec/apply-buildspec.yml")
   }
 }
 
