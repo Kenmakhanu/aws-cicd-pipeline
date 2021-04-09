@@ -62,12 +62,17 @@ resource "aws_codepipeline" "cicd-pipeline"{
     name = "Source"
 
     action {
-      name             = "Source"
+     # name             = "Source"
       category         = "Source"
       owner            = "AWS"
       provider         = "CodeStarSourceConnection"
-      output_artifacts = ["tf-code"]
+      #output_artifacts = ["tf-code"]
       version          =  "1"
+      input_artifacts = []
+       name            = "Source"
+      output_artifacts = [
+        "SourceArtifact",
+      ]
       configuration = {
         ConnectionArn    = var.codestar_connector_credentials
         FullRepositoryId = "Kenmakhanu/aws-cicd-pipeline"
@@ -78,15 +83,16 @@ resource "aws_codepipeline" "cicd-pipeline"{
   }
 
   stage {
-    name = "PLAN"
+    name = "Plan"
 
     action {
       name             = "Build"
       category         = "Build"
       owner            = "AWS"
       provider         = "CodeBuild"
-      input_artifacts  = ["tf-code"]
+      input_artifacts  = ["SourceArtifact",]
       version          = "1"
+      output_artifacts = ["PlanArtifact",]
       configuration = {
         ProjectName = "tf-cicd-plan"
       }
@@ -101,7 +107,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
       category        = "Build"
       provider        = "CodeBuild"
       owner            = "AWS"
-      input_artifacts = ["tf-code"]
+      input_artifacts = ["PlanArtifact",]
       version         = "1"
       configuration = {
         ProjectName    = "tf-cicd-appy"
