@@ -117,7 +117,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
     name = "Deploy"
 
     action {
-      category = "Deploy"
+      category = "Source"
       configuration = {
         BucketName  = aws_s3_bucket.codepipeline-artifact.id
         Extract     = "true"
