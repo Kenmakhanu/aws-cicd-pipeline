@@ -99,7 +99,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
     }
   }
 
-  /*stage {
+  stage {
     name = "Apply"
 
     action {
@@ -107,14 +107,14 @@ resource "aws_codepipeline" "cicd-pipeline"{
       category        = "Build"
       provider        = "CodeBuild"
       owner            = "AWS"
-      input_artifacts = ["PlanArtifact",]
+      input_artifacts = ["SourceArtifact",]
       version         = "1"
       configuration = {
         ProjectName    = "tf-cicd-appy"
         
       }
     }
-  }*/
+  }
   stage {
     name = "Deploy"
 

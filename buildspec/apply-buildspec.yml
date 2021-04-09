@@ -2,8 +2,8 @@ version: 0.2
 phases:
   pre_build:
     commands:
-     - cd SourceArti
      - terraform init
+     - terraform plan
 
   build:
     commands:
