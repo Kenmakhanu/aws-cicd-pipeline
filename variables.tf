@@ -1,9 +1,15 @@
-variable dockerhub_credentials{
-    type = string
+variable "aws_region"{
+    default = "us-east-1"
 }
-variable codestar_connector_credentials{
-    type = string
+variable "apache_ami"{
+    default = "ami-096fda3c22c1c990a"
 }
-variable region{
-    default = "us-west-2"
+variable "instance_type"{
+    default = "t2.micro"
+}
+variable "key_name"{
+    default = "terrakey"
+}
+variable "private_key_path" {
+  default = "terrakey.pem"
 }
