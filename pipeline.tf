@@ -97,7 +97,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
     name = "Apply"
 
     action {
-      name            = "Deploy"
+      name            = "Build"
       category        = "Build"
       provider        = "CodeBuild"
       owner            = "AWS"
