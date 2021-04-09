@@ -3,8 +3,8 @@ phases:
   pre_build:
     commands:
       - terraform init
-      - terraform validate
+      - terraform plan
 
   build:
     commands:
-      - terraform plan   
+      - terraform apply --auto-approve   

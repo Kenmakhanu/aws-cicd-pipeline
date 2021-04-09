@@ -99,7 +99,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
     }
   }
 
-  stage {
+  /*stage {
     name = "Apply"
 
     action {
@@ -114,5 +114,26 @@ resource "aws_codepipeline" "cicd-pipeline"{
         
       }
     }
+  }*/
+  stage {
+    name = "Deploy"
+
+    action {
+      category = "Deploy"
+      configuration = {
+        BucketName  = aws_s3_bucket.codepipeline-artifact.id
+        Extract     = "true"
+      }
+      input_artifacts = [
+        "PlanArtifact",
+      ]
+      name             = "Deploy"
+      output_artifacts = []
+      owner            = "AWS"
+      provider         = "S3"
+      run_order        = 1
+      version          = "1"
+    }
   }
 }
+
