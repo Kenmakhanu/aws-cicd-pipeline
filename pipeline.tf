@@ -68,9 +68,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
       provider         = "CodeStarSourceConnection"
       version          =  "1"
       input_artifacts = []
-      output_artifacts = [
-        "SourceArtifact",
-      ]
+      output_artifacts = ["SourceArtifact",]
       configuration = {
         ConnectionArn    = var.codestar_connector_credentials
         FullRepositoryId = "Kenmakhanu/aws-cicd-pipeline"
