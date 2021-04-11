@@ -67,7 +67,7 @@ resource "aws_codepipeline" "cicd-pipeline"{
       owner            = "AWS"
       provider         = "CodeStarSourceConnection"
       version          =  "1"
-      input_artifacts = []
+      input_artifacts = ["Source"]
       output_artifacts = [
         "SourceArtifact",
       ]
