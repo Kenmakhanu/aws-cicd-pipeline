@@ -20,8 +20,7 @@ resource "aws_codebuild_project" "tf-plan" {
  source {
     type   = "CODEPIPELINE"
     buildspec = file("buildspec/plan-buildspec.yml")
- }
- 
+   }
  }
 
 resource "aws_codebuild_project" "tf-apply" {
@@ -67,7 +66,6 @@ resource "aws_codepipeline" "cicd-pipeline"{
       owner            = "AWS"
       provider         = "CodeStarSourceConnection"
       version          =  "1"
-      input_artifacts = []
       output_artifacts = ["SourceArtifact",]
       configuration = {
         ConnectionArn    = var.codestar_connector_credentials
